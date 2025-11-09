@@ -7,7 +7,7 @@
 
 function validateDate(dateString) {
 	const currentDate = new Date();
-	const brithDate = new Date(dateString);
-	const age = currentDate - brithDate;
+	const birthDate = new Date(dateString);
+	const age = currentDate - birthDate;
 	return age > 14 * 365 * 24 * 60 * 60 * 1000;
 }

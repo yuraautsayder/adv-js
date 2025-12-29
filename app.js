@@ -1,77 +1,43 @@
 'use strict';
-// const Book = function(title, author) {
-// 	this.title = title;
-// 	this.author = author;
-// 	this.isRead = false;
-// }
 
-// Book.prototype.read = function() {
-// 	this.isRead = true;
-// }
+const Person = function (race, name, language) {
+	((this.race = race), (this.name = name), (this.language = language));
+};
 
-// const bookNameOne = new Book('Book name one', 'writer');
-// bookNameOne.read()
-// // console.log(bookNameOne);
-// console.log(bookNameOne.__proto__);
+Person.prototype.say = function () {
+	console.log(this.name, this.language);
+};
 
-// Цель:
+const Ork = function (name, weapon) {
+	Person.call(this, 'Ork', name, 'Orchiy');
+	this.weapon = weapon;
+};
 
-//     Написать функцию конструктор и методы для работы с корзиной товаров.
+Ork.prototype = Object.create(Person.prototype);
 
-// Основные пункты и задачи:
+Ork.prototype.attack = function () {
+	console.log(`${this.name} attacks with ${this.weapon}`);
+};
 
-//     Определение функции конструктора Cart:
-//         Создание корзины (Cart) без принимаемых аргументов.
-//         Создание пустого массива товаров (products) в качестве свойства корзины.
-//     Добавление метода AddProduct:
-//         Функция принимает продукт и добавляет его в массив products, если такого продукта нет (проверка по идентификатору).
-//     Реализация метода увеличения количества товара (increaseAmount):
-//         Функция принимает идентификатор продукта и увеличивает его количество на единицу.
-//     Реализация метода уменьшения количества товара (decreaseAmount):
-//         Функция принимает идентификатор продукта и уменьшает его количество на единицу.
-//         Продукты с количеством 0 удаляются из корзины.
-// const product = { id: 1, name: 'Bread', count: 1 };
+const Elf = function (name, spell) {
+	Person.call(this, 'Elf', name, 'Elfiyskiy');
+	this.spell = spell;
+};
 
-// const Cart = function () {
-// 	this.products = [];
-// };
+Elf.prototype = Object.create(Person.prototype);
 
-// Cart.prototype.addProduct = function (product) {
-// 	if (this.products.find((product) => product.id === product.id)) {
-// 		return;
-// 	}
-// 	this.products.push(product);
-// };
+Elf.prototype.castSpell = function () {
+	console.log(`${this.name} casts a ${this.spell}`);
+};
 
-// Cart.prototype.increaseAmount = function (id) {
-// 	this.products = this.products.map((product) => {
-// 		if (product.id == id) {
-// 			product.count++;
-// 			return product;
-// 		}
-// 		return product;
-// 	});
-// };
-// Cart.prototype.decreaseAmount = function (id) {
-// 	this.products = this.products
-// 		.map((product) => {
-// 			if (product.id == id) {
-// 				product.count--;
-// 				return product;
-// 			}
-// 			return product;
-// 		})
-// 		.filter(product => product.count > 0);
-// };
+Elf.prototype.createSpell = function () {
+	console.log(`${this.name} creates a ${this.spell}`);
+};
+const ork = new Ork('Green-Ork', 'Axe');
+ork.say();
+ork.attack();
 
-// const cart = new Cart();
-// cart.addProduct(product);
-// cart.increaseAmount(1);
-// cart.decreaseAmount(1);
-// cart.decreaseAmount(1);
-// console.log(cart)
-
-
-
-// maybe help
-// Object.create(Person.prototype)
+const elf = new Elf('White-Elf', 'AMP');
+elf.say();
+elf.createSpell();
+elf.castSpell();

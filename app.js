@@ -1,29 +1,39 @@
 'use strict';
 
-// const Book = function (title, author) {
-// 	this.autor = autor;
-// 	this.title = title;
-// 	this.isRead = false;
+// const task = {
+// 	title: 'task1',
+// 	dueTo: new Date('2025/12/27'),
+
+// 	get isOverdue() {
+// 		return this.dueTo < new Date();
+// 	},
+
+// 	set isOverdue(isOverdueTask) {
+// 		if (!isOverdueTask) {
+// 			this.dueTo = new Date();
+// 		}
+// 	},
 // };
 
-// Book.prototype.read = function () {
-// 	this.isRead = true;
-// };
+// console.log(task.isOverdue);
+// task.isOverdue = false;
+// console.log(task);
 
-class BookClass {
-	isRead = false;
-	constructor(title, author) {
-		this.autor = author;
-		this.title = title;
-		this.isRead = false;
+class Task {
+	constructor(title, dueDate) {
+		((this.tite = title), (this.dueDate = dueDate));
 	}
-	read() {
-		this.isRead = true;
+	get isOverdue() {
+		return this.dueTo < new Date();
+	}
+	set dueDate(date) {
+		if (date < new Date()) {
+			return;
+		}
+		this._dueDate = date;
 	}
 }
 
-const testBook = new BookClass('testovaya', 'fld');
-
-testBook.read();
-console.log(testBook);
-// console.log(testBook.__proto__);
+const newTask = new Task('true', new Date('2021/1/1'));
+// console.log((newTask.dueDate = new Date('2027/1/1')));
+console.log(newTask._dueDate = new Date());

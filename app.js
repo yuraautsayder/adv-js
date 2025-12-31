@@ -1,39 +1,71 @@
 'use strict';
 
-// const task = {
-// 	title: 'task1',
-// 	dueTo: new Date('2025/12/27'),
+//number.MAX_SAFE_INTEGER
+//new Number();
 
-// 	get isOverdue() {
-// 		return this.dueTo < new Date();
-// 	},
+//Array.from([0,1,3]);
+//new Array();
+// class Test {
+//   static hello() {
+//     console.log('Hello');
+//   }
+//   static {
+//     let b = 5;
+//     this.a = 5;
+//   }
+// }
 
-// 	set isOverdue(isOverdueTask) {
-// 		if (!isOverdueTask) {
-// 			this.dueTo = new Date();
-// 		}
-// 	},
-// };
+// Test.hello();
 
-// console.log(task.isOverdue);
-// task.isOverdue = false;
-// console.log(task);
+// class Car {
+// 	#vin = 6;
+// 	speed;
+// }
+class User {
+	#login;
+	#_password;
 
-class Task {
-	constructor(title, dueDate) {
-		((this.tite = title), (this.dueDate = dueDate));
+	constructor(login, password) {
+		this.#login = login;
+		this.#password = password;
 	}
-	get isOverdue() {
-		return this.dueTo < new Date();
+
+	set #password(pass) {
+		this.#_password = pass.split('').reverse().join('');
 	}
-	set dueDate(date) {
-		if (date < new Date()) {
-			return;
+
+	get #password() {
+		return this.#_password.split('').reverse().join('');
+	}
+
+	get login() {
+		return this.#login;
+	}
+
+	checkPassword(pass) {
+		return this.#password === pass;
+	}
+
+	changePassword(oldPass, newPass) {
+		if (!this.checkPassword(oldPass)) {
+			return false;
 		}
-		this._dueDate = date;
+		this.#password = newPass;
+		return true;
 	}
 }
 
-const newTask = new Task('true', new Date('2021/1/1'));
-// console.log((newTask.dueDate = new Date('2027/1/1')));
-console.log(newTask._dueDate = new Date());
+const user = new User('admin', '123');
+console.log(user);
+console.log(user.checkPassword('asd'));
+
+console.log('proverka');
+console.log(user.checkPassword('123'));
+console.log('zamena na new');
+console.log(user.changePassword('123', '12341'));
+console.log('test starogo');
+console.log(user.checkPassword('123'));
+console.log('test novogo');
+console.log(user.checkPassword('12341'));
+
+console.log(user);

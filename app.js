@@ -1,79 +1,62 @@
 'user sctrict';
-
-// class Film {
-// 	#name;
-// 	#author;
-// 	rating;
-// 	#length;
-
-// 	constructor(name, author, length) {
-// 		this.#name = name;
-// 		this.#author = author;
-// 		this.#length = length;
+// class Book {
+// 	constructor(title, author) {
+// 		this.title = title;
+// 		this.author = author;
 // 	}
-
-// 	get name() {
-// 		return this.#name;
-// 	}
-
-// 	get author() {
-// 		return this.#author;
-// 	}
-
-// 	get length() {
-// 		return this.#length;
+// 	buy() {
+// 		console.log('Buy');
 // 	}
 // }
 
-// const film = new Film('Avatar', 'Cameron', 240);
-// console.log(film);
+// class AudioBook extends Book {
+// 	constructor(title, author, lenMin) {
+// 		super(title, author);
+// 		this.lenMin = lenMin;
+// 	}
+// 	log() {
+// 		console.log(`${this.title} - ${this.lenMin}`);
+// 	}
+// }
 
-// const Book = function (title, author) {
-// 	this.title = title;
-// 	this.author = author;
-// };
-
-// Book.prototype.buy = function () {
-// 	console.log('Buy');
-// };
-
-// const AudioBook = function (title, author, lenMin) {
-// 	Book.call(this, title, author);
-// 	this.lenMin = lenMin;
-// };
-
-// AudioBook.prototype = Object.create(Book.prototype);
-// AudioBook.prototype.constructor = AudioBook;
-
-// AudioBook.prototype.log = function () {
-// 	console.log(`${this.title} - ${this.lenMin}`);
-// };
-
-// const book = new AudioBook('Test book', 'Author Andrew', 20 * 60);
+// const book = new AudioBook('kniga 1', 'author misha', 60 * 20);
 // book.log();
 // book.buy();
-// console.log(book);
-
-class Book {
-	constructor(title, author) {
-		this.title = title;
-		this.author = author;
+class Enemy {
+	health;
+	constructor(health) {
+		this.health = health;
 	}
-	buy() {
-		console.log('Buy');
+
+	recieveDamage(damage) {
+		this.health = this.health - damage;
+		console.log(this.health);
 	}
 }
 
-class AudioBook extends Book {
-	constructor(title, author, lenMin) {
-		super(title, author);
-		this.lenMin = lenMin;
+class Sword {
+	#damage;
+	constructor(damage) {
+		this.#damage = damage;
 	}
-	log() {
-		console.log(`${this.title} - ${this.lenMin}`);
+	strike(enemy) {
+		enemy.recieveDamage(this.#damage);
 	}
 }
 
-const book = new AudioBook('kniga 1', 'author misha', 60 * 20);
-book.log();
-book.buy();
+class Orc extends Enemy {
+	constructor(health) {
+		super(health);
+	}
+
+	recieveDamage(damage) {
+		if (Math.random() > 0.5) {
+			this.health = this.health - damage;
+			console.log(this.health);
+		}
+	}
+}
+
+const enemy = new Enemy(10);
+const sword = new Sword(3);
+sword.strike(enemy);

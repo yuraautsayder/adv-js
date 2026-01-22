@@ -1,36 +1,87 @@
-'user sctrict';
+'use strict';
+/*
+const Person = function (race, name, language) {
+	((this.race = race), (this.name = name), (this.language = language));
+};
 
-class Wallet {
-	balance = 0;
+Person.prototype.say = function () {
+	console.log(this.name, this.language);
+};
 
-	add(sum) {
-		this.balance += sum;
-		return this;
+const Ork = function (name, weapon) {
+	Person.call(this, 'Ork', name, 'Orchiy');
+	this.weapon = weapon;
+};
+
+Ork.prototype = Object.create(Person.prototype);
+
+Ork.prototype.attack = function () {
+	console.log(`${this.name} attacks with ${this.weapon}`);
+};
+
+const Elf = function (name, spell) {
+	Person.call(this, 'Elf', name, 'Elfiyskiy');
+	this.spell = spell;
+};
+
+Elf.prototype = Object.create(Person.prototype);
+
+Elf.prototype.castSpell = function () {
+	console.log(`${this.name} casts a ${this.spell}`);
+};
+
+Elf.prototype.createSpell = function () {
+	console.log(`${this.name} creates a ${this.spell}`);
+};
+const ork = new Ork('Green-Ork', 'Axe');
+ork.say();
+ork.attack();
+
+const elf = new Elf('White-Elf', 'AMP');
+elf.say();
+elf.createSpell();
+elf.castSpell();
+ */
+
+class Person {
+	constructor(race, name, language) {
+		this.race = race;
+		this.name = name;
+		this.language = language;
 	}
-
-	remove(sum) {
-		this.balance -= sum;
-		return this;
+	say() {
+		console.log(this.name, this.language);
 	}
 }
 
-const wallet = new Wallet();
-const res = wallet.add(100).remove(10);
-console.log(wallet);
-
-class Builder {
-	house = {};
-	addRoof() {
-		this.house.roof = 'Roof';
-		return this;
+class Ork extends Person {
+	constructor(name, weapon) {
+		super('Ork', name, 'Orchiy');
+		this.weapon = weapon;
 	}
-	addFloor() {
-		this.house.floor = 'Floor';
-		return this;
-	}
-	execute() {
-		return this.house;
+	attack() {
+		console.log(`${this.name} attacks with ${this.weapon}`);
 	}
 }
-const res2 = new Builder().addRoof().addFloor().execute();
-console.log(res2);
+
+class Elf extends Person {
+	constructor(name, spell) {
+		super('Elf', name, 'Elfiyskiy');
+		this.spell = spell;
+	}
+	castSpell() {
+		console.log(`${this.name} cast a ${this.spell}`);
+	}
+	createSpell() {
+		console.log(`${this.name} creates a ${this.spell}`);
+	}
+}
+
+const ork = new Ork('Green-ork', 'Axe');
+ork.say();
+ork.attack();
+
+const elf = new Elf('Elf-huelf', 'Frost blast');
+elf.say();
+elf.createSpell();
+elf.castSpell();

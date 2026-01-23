@@ -1,19 +1,27 @@
 'use strict';
 
-class Weapon {
-	// strike() {} don't need all weapons
-	// shoot() {} too don't all other weapons
-	dealDamage() {}
+class DB {
+	save(items) {
+		console.log(`saved to db: ${items}`);
+	}
 }
-
-class AK extends Weapon {
-	shoot() {
-		this.dealDamage();
+class MongoDB extends DB {
+	save(items) {
+		console.log(`saved to MongoDB: ${items}`);
 	}
 }
 
-class Sword extends Weapon {
-	strike() {
-		this.dealDamage();
+class TodoList {
+	items = [1, 2, 3];
+	db;
+	constructor(db) {
+		this.db = db;
+	}
+	saveToDb() {
+		this.db.save(this.items);
 	}
 }
+const list = new TodoList(new DB());
+const list2 = new TodoList(new MongoDB());
+list.saveToDb();
+list2.saveToDb();
